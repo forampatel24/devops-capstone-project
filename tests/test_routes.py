@@ -123,6 +123,18 @@ class TestAccountService(TestCase):
             "strict-origin-when-cross-origin",
         )
 
+    def test_cors_headers(self):
+        """It should return CORS headers"""
+        response = self.client.get(
+            "/",
+            environ_overrides=HTTPS_ENVIRON,
+        )
+
+        self.assertEqual(
+            response.headers.get("Access-Control-Allow-Origin"),
+            "*",
+        )
+
     def test_health(self):
         """It should be healthy"""
         response = self.client.get("/health")
