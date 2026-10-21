@@ -22,10 +22,11 @@ DATABASE_URI = os.getenv(
 
 BASE_URL = "/accounts"
 
-
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -201,8 +202,7 @@ class TestAccountService(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.get_json(), [])
-    
-    
+
     def test_update_an_account(self):
         """It should Update an Account"""
         account = self._create_accounts(1)[0]
@@ -230,8 +230,7 @@ class TestAccountService(TestCase):
             response.status_code,
             status.HTTP_404_NOT_FOUND,
         )
-    
-    
+
     def test_delete_an_account(self):
         """It should Delete an Account"""
         account = self._create_accounts(1)[0]
@@ -255,6 +254,3 @@ class TestAccountService(TestCase):
             response.status_code,
             status.HTTP_204_NO_CONTENT,
         )
-
-
-
