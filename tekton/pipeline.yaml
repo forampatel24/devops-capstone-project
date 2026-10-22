@@ -16,6 +16,7 @@ spec:
     - name: repo-url
     - name: branch
       default: main
+
   tasks:
     - name: init
       workspaces:
@@ -53,5 +54,19 @@ spec:
             - --max-complexity=10
             - --max-line-length=127
             - --statistics
+      runAfter:
+        - clone
+
+    - name: tests
+      taskRef:
+        name: nose
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
+      params:
+        - name: database_uri
+          value: "sqlite:///test.db"
+        - name: args
+          value: "-v --with-spec --spec-color"
       runAfter:
         - clone
